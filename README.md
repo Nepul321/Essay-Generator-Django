@@ -1,0 +1,1 @@
+A basic web application that uses Django, Gemini API, and Python to allow users to generate essays.
