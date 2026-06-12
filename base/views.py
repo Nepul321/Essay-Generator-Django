@@ -14,6 +14,7 @@ def HomeView(request, *args, **kwargs):
 		form = EssayForm(request.POST)
 		if form.is_valid():
 			form.instance.content = reply['markdown']
+			form.instance.user = request.user
 			form.save()
 			return redirect('/')
 	context = {

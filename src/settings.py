@@ -34,6 +34,9 @@ GEMINI_API_KEY=os.getenv("GEMINI_API_KEY")
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = "accounts-login"
+LOGOUT_REDIRECT_URL = "accounts-login"
+
 
 # Application definition
 
@@ -118,6 +121,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
