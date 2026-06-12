@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import EssayForm
 from .service import ask_gemini
 from django.contrib.auth.decorators import login_required
+from .models import Essay
 
 @login_required
 def HomeView(request, *args, **kwargs):
@@ -17,9 +18,19 @@ def HomeView(request, *args, **kwargs):
 			form.instance.content = reply
 			form.instance.user = request.user
 			form.save()
-			return redirect('/')
+			return redirect('essays')
 	context = {
       'form' : form
 	}
 
 	return render(request, template, context)
+
+
+@login_required
+def EssayListView(request, *args, **kwargs):
+	template = "items.html"
+	qs = Essay.objects.all().filter(user=request.user)
+	context = {
+       'qs' : qs
+	}
+	return render(request, template,context)
