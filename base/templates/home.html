@@ -10,6 +10,10 @@ Essay Generator
 <div class="container-fluid my-4">
 <h1>Generate Essay</h1>
 <hr/>
-
+<form method="POST">
+   {% csrf_token %}
+   {{ form.as_p }}
+   <button class="btn btn-primary">Generate</button>
+</form>
 </div>
 {% endblock body %}

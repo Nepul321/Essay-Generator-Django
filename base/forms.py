@@ -4,7 +4,7 @@ from .models import *
 class EssayForm(forms.ModelForm):
 	class Meta:
 		model = Essay
-		fields = ('title', 'paragraphs', 'grade_level', 'content')
+		fields = ('title', 'paragraphs', 'grade_level')
 
 		widgets = {
            'title' : forms.TextInput(attrs={'class' : 'form-control'}),
