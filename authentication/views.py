@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from .decorators import unauthenticated_user
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -11,7 +10,7 @@ def LoginView(request, *args, **kwargs):
   next = ""
   if request.GET:
     next = request.GET['next']
-  form = AuthenticationForm(request, data=request.POST or None)
+  form = LoginForm(request, data=request.POST or None)
   if form.is_valid():
     user = form.get_user()
     login(request, user)

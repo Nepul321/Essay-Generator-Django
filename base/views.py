@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import EssayForm
 from .service import ask_gemini
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def HomeView(request, *args, **kwargs):
 	template = "home.html"
 	form = EssayForm()
@@ -13,7 +14,7 @@ def HomeView(request, *args, **kwargs):
 		reply = ask_gemini(prompt, paragraphs, level)
 		form = EssayForm(request.POST)
 		if form.is_valid():
-			form.instance.content = reply['markdown']
+			form.instance.content = reply
 			form.instance.user = request.user
 			form.save()
 			return redirect('/')
