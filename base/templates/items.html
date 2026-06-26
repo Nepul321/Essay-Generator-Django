@@ -13,7 +13,7 @@ Essays
 <div class="card mb-4">
 	<div class="card-body">
     <p style="font-size: 20px;" class="fw-bold">{{ obj.title }}</p>
-    <a href="" class="btn btn-outline-secondary">View</a>
+    <a href="{% url 'essay' obj.key %}" class="btn btn-outline-secondary">View</a>
 	 </div>
 </div>
 {% endfor %}

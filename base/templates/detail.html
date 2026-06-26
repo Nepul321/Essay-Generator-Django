@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ obj.title }}
+{% endblock title %}
+
+
+{% block body %}
+<div class="container-fluid my-4">
+<h1>{{ obj.title }}</h1>
+<hr />
+<form action="" method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<div class="btn-group">
+<button class="btn btn-primary">Save</button>
+<a href="{% url 'essay-delete' obj.key %}" class="btn btn-outline-danger">Delete</a>
+</div>
+</form>
+</div>
+{% endblock body %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import EssayForm
+from .forms import EssayForm, EssayEditForm
 from .service import ask_gemini
 from django.contrib.auth.decorators import login_required
 from .models import Essay
@@ -34,3 +34,37 @@ def EssayListView(request, *args, **kwargs):
        'qs' : qs
 	}
 	return render(request, template,context)
+
+@login_required
+def EssayView(request, key, *args, **kwargs):
+	template = "detail.html"
+	qs = Essay.objects.all().filter(key=key)
+	if not qs:
+		return redirect('essays')
+	obj = qs.first()
+	form = EssayEditForm(instance=obj)
+	if request.method == "POST":
+		form = EssayEditForm(request.POST, instance=obj)
+		form.save()
+	context = {
+        'obj' : obj,
+        'form' : form,
+	}
+	return render(request, template, context)
+
+@login_required
+def EssayDeleteView(request, key, *args, **kwargs):
+	template = "delete.html"
+	qs = Essay.objects.all().filter(key=key)
+	if not qs:
+		return redirect('essays')
+	obj = qs.first()
+	if obj.user != request.user:
+		return redirect('essays')
+	if request.method == "POST":
+		obj.delete()
+		return redirect('essays')
+	context = {
+        'obj' : obj
+	}
+	return render(request, template, context)
