@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 
 class AccountUpdateForm(forms.ModelForm):
 	class Meta:
@@ -33,3 +33,11 @@ class LoginForm(AuthenticationForm):
             }
         )
     )
+
+class ChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            css = field.widget.attrs.get("class", "")
+            field.widget.attrs["class"] = f"{css} form-control".strip()
