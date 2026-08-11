@@ -14,5 +14,6 @@ Login
  {% csrf_token %}
  <button class="btn btn-outline-primary">Login</button>
 </form>
+<p class="my-4">Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a></p>
 </div>
 {% endblock body %}
