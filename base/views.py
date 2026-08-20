@@ -42,6 +42,8 @@ def EssayView(request, key, *args, **kwargs):
 	if not qs:
 		return redirect('essays')
 	obj = qs.first()
+	if obj.user != request.user:
+		return redirect('essays')
 	form = EssayEditForm(instance=obj)
 	if request.method == "POST":
 		form = EssayEditForm(request.POST, instance=obj)
