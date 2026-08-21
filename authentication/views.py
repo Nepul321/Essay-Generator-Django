@@ -36,7 +36,7 @@ def AccountView(request, *args, **kwargs):
      form = AccountUpdateForm(request.POST, instance=request.user)
      if form.is_valid():
          form.save()
-         return redirect('account-view')
+         return redirect('accounts-account')
    context = {
       'form' : form
    }
